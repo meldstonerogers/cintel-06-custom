@@ -2,3 +2,9 @@ faicons
 shiny
 seaborn
 pandas
+pyarrow
+plotly
+scipy
+shinylive 
+shinywidgets
+shinyswatch
