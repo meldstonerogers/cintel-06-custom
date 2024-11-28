@@ -13,10 +13,12 @@ from shared import app_dir, df
 from shiny import reactive
 from shiny.express import input, render, ui
 
-ui.page_opts(title="This is Bananas!", fillable=True, theme=theme.pulse)
-
+ui.page_opts(
+    title="This is Bananas!", 
+    theme=theme.minty, 
+    style="text-align: center; font-size: 30px; font-weight: bold;")
+    
 with ui.sidebar(title="Filter Controls"):
-
     options = ["Brazil", "Colombia", "Costa Rica", "Ecuado", "Guatemala", "Honduras", "India", "Philippines"]
     ui.input_checkbox_group(
         "selected_region_list",
@@ -123,7 +125,7 @@ with ui.layout_columns():
             return render.DataGrid(filtered_data()[cols], filters=True)
 
 
-ui.include_css(app_dir/ "docs" / "styles.css")
+#ui.include_css(app_dir/ "docs" / "styles.css")
 
 bananas_df = pd.read_csv("/Users/melissastonerogers/Documents/cintel-06-custom/dashboard/banana_quality_dataset.csv")
 
