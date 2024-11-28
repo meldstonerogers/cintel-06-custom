@@ -3,7 +3,7 @@ Cintel Project 6
 Melissa Stone Rogers, [GitHub](https://github.com/meldstonerogers/cintel-06-custom)
 
 ## Introduction
-Professional project using python, shiny, and reactive.calc function to publish a reactive shiny app using the [Banana Quality Dataset](https://www.kaggle.com/datasets/mrmars1010/banana-quality-dataset/data). 
+Professional project using python, shiny, and reactive.calc function to publish a reactive shiny app using the [Banana Quality Dataset](https://www.kaggle.com/datasets/mrmars1010/banana-quality-dataset/data). Project was created using the [Py-Shiny-Templates/dashboard](https://github.com/posit-dev/py-shiny-templates/tree/main/dashboard).
 Commands were used on a Mac machine running zsh. 
 
 ## Project Set Up and Dependency Management 
@@ -17,9 +17,14 @@ Create project repository in Github. Create a requirements.txt and .gitignore fi
 - shiny
 - shinylive 
 - shinywidgets
+- seaborn
+- shinylive 
+- shinywidgets
+- shinyswatch
+
+Since you do not want to fork or copy the entire py-shiny-template repository, you can use [this online tool](https://download-directory.github.io/) to download just the desired template folder. Once the folder was downloaded to my machine, I uploaded the whole file to my create project reposity. Then, save and upload the [Banana Quality Dataset](https://www.kaggle.com/datasets/mrmars1010/banana-quality-dataset/data) to your main project folder. Save in folder with main app.py file, separate from other files. 
 
 Publish GitHub Pages for your project repository.
-Create a docs folder within your repository to keep your GitHub Pages content separate from your main project files. Within your GitHub repository, select add file and create a docs folder with, **docs/.gitkeep**. This allows a folder to be created with no content. 
 
 The following instructions borrowed from Dr. Cases's Continous Intelligence Course within NWSU's School of Computer Science and Information Systems: 
 
@@ -65,7 +70,7 @@ git commit -m "initial"
 git push origin main
 ```
 ## Start Your Project 
-Follow instructions within Dr. Case's GitHub repositories: [basic app](https://github.com/denisecase/cintel-05-cintel-basic); [fancy app](https://github.com/denisecase/cintel-05-cintel-fancy); [final CI app](https://github.com/denisecase/cintel-05-cintel), and other course content provided. 
+
 
 ### Troubleshooting
 Using the following code, I attempted to run my Shiny app within a web browser. 
