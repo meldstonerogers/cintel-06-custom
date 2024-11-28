@@ -24,7 +24,9 @@ Create project repository in Github. Create a requirements.txt and .gitignore fi
 
 Since you do not want to fork or copy the entire py-shiny-template repository, you can use [this online tool](https://download-directory.github.io/) to download just the desired template folder. Once the folder was downloaded to my machine, I uploaded the whole file to my create project reposity. Then, save and upload the [Banana Quality Dataset](https://www.kaggle.com/datasets/mrmars1010/banana-quality-dataset/data) to your main project folder. Save in folder with main app.py file, separate from other files. 
 
-Publish GitHub Pages for your project repository.
+### Publish GitHub Pages for your project repository.
+
+Add your styles.css file to a new folder named docs. Now you are ready to publish a GitHub Page for your app. 
 
 The following instructions borrowed from Dr. Cases's Continous Intelligence Course within NWSU's School of Computer Science and Information Systems: 
 
