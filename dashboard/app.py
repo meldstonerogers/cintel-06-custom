@@ -4,6 +4,7 @@ import pyarrow as pa
 from shinyswatch import theme 
 import plotly.express as px
 import scipy 
+import shiny
 import shinylive
 from shinywidgets import render_widget, render_plotly
 from pathlib import Path
