@@ -4,21 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Banana Quality Dashboard</title>
+    
+    <!-- Explicitly load CSS and JS from multiple CDN sources -->
     <link href="https://cdn.jsdelivr.net/npm/shinylive@0.2.2/shinylive.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.22.1/full/pyodide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/shinylive@0.2.2/shinylive.js"></script>
 </head>
 <body>
+    <div id="loading-message" style="color: blue; font-size: 18px;">
+        Loading Banana Quality Dashboard... Please wait.
+    </div>
     <div id="error-display" style="color: red; font-weight: bold;"></div>
     <div id="shinylive-app"></div>
     
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/shinylive@0.2.2/shinylive.js"></script>
     <script type="text/javascript">
-        const BACKEND = 'https://shinylive.io/v2/editor/';
-        const CODE = `
-# Explicit imports for debugging
+        // Verify Shinylive is loaded
+        window.addEventListener('load', function() {
+            console.log('Page fully loaded');
+            
+            if (typeof shinylive === 'undefined') {
+                document.getElementById('error-display').textContent = 
+                    'Shinylive library failed to load. Check internet connection and script sources.';
+                document.getElementById('loading-message').style.display = 'none';
+                return;
+            }
+
+            const BACKEND = 'https://shinylive.io/v2/editor/';
+            const CODE = `
+# Comprehensive import and error handling
 import sys
 import os
 
-# Print current working directory and Python version for debugging
+# Debugging imports
 print(f"Python version: {sys.version}")
 print(f"Current working directory: {os.getcwd()}")
 
@@ -34,35 +51,40 @@ except ImportError as e:
     print(f"Import Error: {e}")
     raise
 
-# Read CSV with error handling
+# Read CSV with explicit error handling
 try:
-    # Use relative path or ensure CSV is in same directory
+    # Use relative path
     bananas_df = pd.read_csv("banana_quality_dataset.csv")
     print(f"CSV loaded successfully. Shape: {bananas_df.shape}")
+    print(f"Columns: {list(bananas_df.columns)}")
 except Exception as e:
     print(f"Error loading CSV: {e}")
     raise
 
-# Rest of your app code remains the same as previous submission
-# ... [previous app code] ...
+# Your existing Shiny app code here (same as previous submission)
+# [Rest of your app code remains unchanged]
 
-# Add extra error logging
+# Additional error logging
 print("Shiny app definition complete.")
 `;
-        
-        // Enhanced error handling
-        try {
-            const runtime = new shinylive.ShinyLiveRuntime(
-                document.getElementById('shinylive-app'), 
-                BACKEND, 
-                {'main.py': CODE}
-            );
-            runtime.run();
-        } catch (error) {
-            console.error("Shinylive Runtime Error:", error);
-            document.getElementById('error-display').textContent = 
-                `Error initializing app: ${error.message}`;
-        }
+            
+            try {
+                const runtime = new shinylive.ShinyLiveRuntime(
+                    document.getElementById('shinylive-app'), 
+                    BACKEND, 
+                    {'main.py': CODE}
+                );
+                runtime.run();
+                
+                // Hide loading message when app starts
+                document.getElementById('loading-message').style.display = 'none';
+            } catch (error) {
+                console.error("Shinylive Runtime Error:", error);
+                document.getElementById('error-display').textContent = 
+                    `Error initializing app: ${error.message}`;
+                document.getElementById('loading-message').style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>
