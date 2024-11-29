@@ -76,7 +76,7 @@ git push origin main
 ### Troubleshooting
 Using the following code, I attempted to run my Shiny app within a web browser. 
 ```
-shiny run --reload --launch-browser penguins/app.py
+shiny run --reload --launch-browser dashboard/app.py
 ```
 
 I got numerous errors and my app would not run and launch. Thanks to dilligent colleagues within the NWSU's Continuous Intelligence course, the following troubleshooting was noted. To successfully launch my Shiny app, I downgraded websockets to version 10.4 from 14.0 using the following code.

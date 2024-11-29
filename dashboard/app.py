@@ -159,11 +159,6 @@ else:
 # Load the dataset
 bananas_df = pd.read_csv(csv_path)
 
-
-
-
-
-
 @reactive.calc
 def filtered_data():
     isFilterMatch = (
