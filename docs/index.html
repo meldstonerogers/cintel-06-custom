@@ -1,102 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Banana Quality Dashboard</title>
-    
-    <!-- Direct, explicit library loading -->
-    <link rel="stylesheet" href="./shinylive/style-resets.css">
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/shinylive@0.2.3/shinylive.js"></script>
-</head>
-<body>
-    <div id="shinylive-app"></div>
-    
-    <script type="text/javascript">
-        // Ensure Shinylive is fully loaded before initializing
-        document.addEventListener('DOMContentLoaded', () => {
-            try {
-                // Verify Shinylive is available
-                if (typeof shinylive === 'undefined') {
-                    throw new Error('Shinylive library not loaded');
-                }
-
-                const BACKEND = 'https://shinylive.io/v2/editor/';
-                const CODE = `
-# Essential imports
-import sys
-import os
-import pandas as pd
-import plotly.express as px
-from faicons import icon_svg
-from shiny import reactive
-from shiny.express import input, render, ui
-from shinywidgets import render_widget
-
-# Debugging information
-print(f"Python version: {sys.version}")
-print(f"Current working directory: {os.getcwd()}")
-
-# Read CSV with comprehensive error handling
-try:
-    bananas_df = pd.read_csv("banana_quality_dataset.csv")
-    print(f"CSV loaded successfully. Shape: {bananas_df.shape}")
-    print(f"Columns: {list(bananas_df.columns)}")
-except Exception as e:
-    print(f"CSV Loading Error: {e}")
-    # Create a sample dataframe if CSV fails to load
-    bananas_df = pd.DataFrame({
-        'region': ['Brazil', 'Colombia', 'Costa Rica'],
-        'variety': ['Burro', 'Cavendish', 'Plantain'],
-        'quality_score': [3.5, 4.0, 3.8],
-        'weight_g': [100, 120, 110],
-        'length_cm': [15, 18, 16]
-    })
-
-# Sidebar and UI setup
-with ui.sidebar(title="Filter Controls", bg="#8D6B94"):
-    # Region selection
-    ui.input_checkbox_group(
-        "selected_region_list",
-        "Select Region",
-        choices=["Brazil", "Colombia", "Costa Rica", "Guatemala", "Honduras"],
-        selected=["Brazil", "Colombia", "Costa Rica"]
-    )
-
-    # Variety selection
-    ui.input_selectize(
-        "selected_variety_list",
-        "Choose banana variety(ies)",
-        ["Burro", "Cavendish", "Plantain"],
-        multiple=True,
-        selected="Burro"
-    )
-
-# Reactive data filtering
-@reactive.calc
-def filtered_data():
-    return bananas_df[
-        bananas_df["region"].isin(input.selected_region_list()) &
-        bananas_df["variety"].isin(input.selected_variety_list())
-    ]
-
-# Additional app setup would go here
-print("Shiny app definition complete.")
-`;
-                
-                // Initialize Shinylive Runtime
-                const runtime = new shinylive.ShinyLiveRuntime(
-                    document.getElementById('shinylive-app'), 
-                    BACKEND, 
-                    {'main.py': CODE}
-                );
-                runtime.run();
-            } catch (error) {
-                console.error('App Initialization Error:', error);
-                document.body.innerHTML = `<div style="color: red;">Error: ${error.message}</div>`;
-            }
-        });
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shiny App</title>
+    <script
+      src="./shinylive/load-shinylive-sw.js"
+      type="module"
+    ></script>
+    <script type="module">
+      import { runExportedApp } from "./shinylive/shinylive.js";
+      runExportedApp({
+        id: "root",
+        appEngine: "python",
+        relPath: "",
+      });
     </script>
-</body>
+    <link rel="stylesheet" href="./shinylive/style-resets.css" />
+    <link rel="stylesheet" href="./shinylive/shinylive.css" />
+    
+  </head>
+  <body>
+    
+    <div style="height: 100vh; width: 100vw" id="root"></div>
+    
+  </body>
 </html>
