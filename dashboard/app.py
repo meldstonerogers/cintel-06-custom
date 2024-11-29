@@ -3,13 +3,10 @@ import pandas as pd
 import pyarrow as pa
 from shinyswatch import theme 
 import plotly.express as px
-import shiny
 import shinylive
 from shinywidgets import render_widget, render_plotly
 from pathlib import Path
-
-# Import data from shared.py
-from shiny import reactive
+from shiny import reactive, App, ui 
 from shiny.express import input, render, ui
 
 #ui.page_opts(
