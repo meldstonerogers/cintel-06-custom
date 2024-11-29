@@ -3,7 +3,6 @@ import pandas as pd
 import pyarrow as pa
 from shinyswatch import theme 
 import plotly.express as px
-import scipy 
 import shiny
 import shinylive
 from shinywidgets import render_widget, render_plotly
@@ -150,7 +149,7 @@ with ui.layout_columns():
 
 #ui.include_css(app_dir/ "docs" / "styles.css")
 
-bananas_df = pd.read_csv("/Users/melissastonerogers/Documents/cintel-06-custom/dashboard/banana_quality_dataset.csv")
+bananas_df = pd.read_csv("/Users/melissastonerogers/Documents/cintel-06-custom/docs/banana_quality_dataset.csv")
 
 @reactive.calc
 def filtered_data():
