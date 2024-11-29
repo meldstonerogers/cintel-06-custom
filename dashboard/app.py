@@ -175,4 +175,3 @@ def updated_region_selection():
 #def update_region():
     selected_regions = updated_region_selection()
     return f"Selected regions: {', '.join(selected_regions)}"
-
