@@ -9,16 +9,15 @@ from shinywidgets import render_widget, render_plotly
 from pathlib import Path
 
 # Import data from shared.py
-from shared import app_dir, df
 from shiny import reactive
 from shiny.express import input, render, ui
 
-ui.page_opts(
-    title="This is Bananas!", 
-    theme=theme.minty, 
-    style="text-align: center; font-size: 30px; font-weight: bold;")
+#ui.page_opts(
+#    title="This is Bananas!", 
+ #   theme=theme.minty, 
+  #  style="text-align: center; font-size: 30px; font-weight: bold;")
     
-with ui.sidebar(title="Filter Controls"):
+with ui.sidebar(title="Filter Controls", bg="#8D6B94"):
     options = ["Brazil", "Colombia", "Costa Rica", "Ecuado", "Guatemala", "Honduras", "India", "Philippines"]
     ui.input_checkbox_group(
         "selected_region_list",
@@ -57,23 +56,41 @@ with ui.sidebar(title="Filter Controls"):
     def select():
         return f"{input.selectize()}"  
 
-
+with ui.layout_columns():
+    with ui.card(full_screen=True):
+        ui.card_header(
+            "This is Bananas!",
+            style="background-color: #F7FA4F; color: #1D1F21; text-align: center; font-size: 36px;",
+        )
+        ui.p(
+        "Check out the Banana Quality data set on ",
+        ui.a("Kaggle", href="https://www.kaggle.com/datasets/mrmars1010/banana-quality-dataset/data", target="_blank", style="color: #007BFF; text-decoration: underline;"),
+        ".",
+        style="text-align: center; font-size: 16px;"
+    )
+        ui.p(
+        "Learn how this app was built at Melissa's ",
+        ui.a("GitHub", href="https://github.com/meldstonerogers/cintel-06-custom", target="_blank", style="color: #007BFF; text-decoration: underline;"),
+        ".",
+        style="text-align: center; font-size: 16px;"
+    )
+        
 with ui.layout_column_wrap(fill=False):
-    with ui.value_box(showcase=icon_svg("thumbs-up")):
+    with ui.value_box(showcase=icon_svg("thumbs-up"), style="background-color: #F7936B"):
         "Average Quality Score (out of 4)"
 
         @render.text
         def ave_quality():
             return f"{filtered_data()['quality_score'].mean():.1f}"
 
-    with ui.value_box(showcase=icon_svg("weight-hanging")):
+    with ui.value_box(showcase=icon_svg("weight-hanging"), style="background-color: #F7936B"):
         "Average Banana Weight"
 
         @render.text
         def ave_weight():
             return f"{filtered_data()['weight_g'].mean():.1f} g"
 
-    with ui.value_box(showcase=icon_svg("ruler-vertical")):
+    with ui.value_box(showcase=icon_svg("ruler-vertical"), style="background-color: #F7936B"):
         "Average Banana Length"
 
         @render.text
@@ -82,7 +99,10 @@ with ui.layout_column_wrap(fill=False):
 
 with ui.layout_columns():
     with ui.card(full_screen=True):
-        ui.card_header("Plotly Bananas Scatterplot")
+        ui.card_header(
+            "Plotly Bananas Scatterplot",
+            style="background-color: #25CED1; color: ##1D1F21;",
+        )
 
         @render_widget
         def banana_scatterplot():
@@ -111,8 +131,10 @@ with ui.layout_columns():
             return scatterplot
 
     with ui.card(full_screen=True):
-        ui.card_header("B-A-N-A-N-A-S Data")
-
+        ui.card_header(
+            "B-A-N-A-N-A-S Data",
+            style="background-color: #25CED1; color: ##1D1F21;",
+        )
         @render.data_frame
         def summary_statistics():
             cols = [
