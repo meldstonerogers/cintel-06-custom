@@ -26,7 +26,7 @@
       // Load the CSV data with Pyodide
       async function loadCSV() {
         // Replace with the actual URL where your CSV is hosted
-        let response = await fetch('https://github.com/meldstonerogers/cintel-06-custom/blob/main/docs/banana_quality_dataset.csv');
+        let response = await fetch('https://raw.githubusercontent.com/meldstonerogers/cintel-06-custom/refs/heads/main/docs/banana_quality_dataset.csv');
         let csvText = await response.text();
         
         // Load Pyodide and run Python to process the CSV
