@@ -11,7 +11,6 @@ Commands were used on a Mac machine running zsh.
 Create project repository in Github. Create a requirements.txt and .gitignore file for Python code. Add the following to your requirements.txt: 
 - faicons 
 - pandas
-- pyarrow
 - plotly
 - scipy
 - shiny
@@ -94,3 +93,8 @@ git add .
 git commit -m "final"                         
 git push origin main
 ```
+
+shinylive export /Users/melissastonerogers/Documents/cintel-06-custom/dashboard /Users/melissastonerogers/Documents/cintel-06-custom/docs
+shinylive export /Users/melissastonerogers/Documents/cintel-06-custom/dashboard /Users/melissastonerogers/Documents/cintel-06-custom/docs
+
+cp /Users/melissastonerogers/Documents/cintel-06-custom/dashboard/app.py /Users/melissastonerogers/Documents/cintel-06-custom/docs/

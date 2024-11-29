@@ -6,7 +6,6 @@ from shinywidgets import render_widget, render_plotly
 from pathlib import Path
 from shiny import reactive, App, ui 
 from shiny.express import input, render, ui
-import shinylive
 
 #ui.page_opts(
 #    title="This is Bananas!", 
@@ -145,7 +144,25 @@ with ui.layout_columns():
 
 #ui.include_css(app_dir/ "docs" / "styles.css")
 
-bananas_df = pd.read_csv("/Users/melissastonerogers/Documents/cintel-06-custom/docs/banana_quality_dataset.csv")
+import os
+import pandas as pd
+
+# Detect Shinylive environment and set the appropriate path
+if os.getenv("SHINYLIVE", False):
+    # Relative path for the Shinylive export
+    csv_path = "banana_quality_dataset.csv"
+else:
+    # Local development path
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    csv_path = os.path.join(script_dir, "../docs/banana_quality_dataset.csv")
+
+# Load the dataset
+bananas_df = pd.read_csv(csv_path)
+
+
+
+
+
 
 @reactive.calc
 def filtered_data():
@@ -170,3 +187,4 @@ def updated_region_selection():
 #def update_region():
     selected_regions = updated_region_selection()
     return f"Selected regions: {', '.join(selected_regions)}"
+
