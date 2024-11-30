@@ -3,51 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shiny App with CSV Data</title>
-    
-    <!-- Load Pyodide -->
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.22.0/full/pyodide.js"></script>
-    
+    <title>Shiny App</title>
     <script
       src="./shinylive/load-shinylive-sw.js"
       type="module"
     ></script>
-    
     <script type="module">
       import { runExportedApp } from "./shinylive/shinylive.js";
-      
-      // Initialize the Shiny app
       runExportedApp({
         id: "root",
         appEngine: "python",
         relPath: "",
       });
-      
-      // Load the CSV data with Pyodide
-      async function loadCSV() {
-        // Correct raw URL to access the CSV from GitHub (replace with actual URL)
-        let response = await fetch('https://raw.githubusercontent.com/meldstonerogers/cintel-06-custom/main/docs/banana_quality_dataset.csv');
-        let csvText = await response.text();
-        
-        // Load Pyodide and run Python to process the CSV
-        let pyodide = await loadPyodide();
-        pyodide.runPython(`
-          import pandas as pd
-          from io import StringIO
-          data = StringIO(${JSON.stringify(csvText)})
-          df = pd.read_csv(data)
-          print(df.head())  // Output the first few rows to the browser console
-        `);
-      }
-      loadCSV();
     </script>
-    
     <link rel="stylesheet" href="./shinylive/style-resets.css" />
     <link rel="stylesheet" href="./shinylive/shinylive.css" />
+    
   </head>
-  
   <body>
+    
     <div style="height: 100vh; width: 100vw" id="root"></div>
+    
   </body>
 </html>
-

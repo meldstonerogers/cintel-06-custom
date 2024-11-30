@@ -145,19 +145,26 @@ with ui.layout_columns():
 #ui.include_css(app_dir/ "docs" / "styles.css")
 
 import os
-import pandas as pd
 
-# Detect Shinylive environment and set the appropriate path
-if os.getenv("SHINYLIVE", False):
-    # Relative path for the Shinylive export
-    csv_path = "banana_quality_dataset.csv"
+# Get the base directory of the current app.py
+base_dir = os.path.dirname(__file__)
+
+# Define potential locations for the CSV file
+dashboard_csv_path = os.path.join(base_dir, "..", "dashboard", "banana_quality_dataset.csv")  # Relative path to dashboard
+docs_csv_path = os.path.join(base_dir, "banana_quality_dataset.csv")  # Same directory as app.py in docs
+
+# Check which path exists and use it
+if os.path.exists(dashboard_csv_path):
+    csv_path = dashboard_csv_path
+elif os.path.exists(docs_csv_path):
+    csv_path = docs_csv_path
 else:
-    # Local development path
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    csv_path = os.path.join(script_dir, "../docs/banana_quality_dataset.csv")
+    raise FileNotFoundError("banana_quality_dataset.csv not found in either dashboard or docs folder.")
 
-# Load the dataset
+# Load the CSV file
 bananas_df = pd.read_csv(csv_path)
+
+print(f"Using CSV file located at: {csv_path}")
 
 @reactive.calc
 def filtered_data():
